@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Hexo</title>
+  <title>基于Ubuntu系统的elk搭建 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="1. 背景进入实习公司后，第一个任务便是独立搭建一个日志分析系统，方便对日志的集中管理。要求所有产生日志的机器产生日志后第一时间集中到日志分析系统上去，这就要求，1.要在Ubuntu上搭建好elk；2.在所有产生日志的机器上安装脚本，让他们产生日志后第一时间将日志发送到日志分析系统所在的机器上；3.产生的日志要被打上标签标明ID号和项目出处方便索引。本文首先介绍如何实现第一个要求。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Ubuntu系统的elk搭建">
+<meta property="og:url" content="http://example.com/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. 背景进入实习公司后，第一个任务便是独立搭建一个日志分析系统，方便对日志的集中管理。要求所有产生日志的机器产生日志后第一时间集中到日志分析系统上去，这就要求，1.要在Ubuntu上搭建好elk；2.在所有产生日志的机器上安装脚本，让他们产生日志后第一时间将日志发送到日志分析系统所在的机器上；3.产生的日志要被打上标签标明ID号和项目出处方便索引。本文首先介绍如何实现第一个要求。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-12-28T03:48:10.000Z">
+<meta property="article:modified_time" content="2022-12-28T11:02:07.912Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Ubuntu+elk搭建日志管理系统">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -154,36 +159,144 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-基于Ubuntu系统的elk搭建" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2022-12-28T03:48:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/">基于Ubuntu系统的elk搭建</a>
+    <h1 class="article-title" itemprop="name">
+      基于Ubuntu系统的elk搭建
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/" class="archive-article-date">
+  	<time datetime="2022-12-28T03:48:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>进入实习公司后，第一个任务便是独立搭建一个日志分析系统，方便对日志的集中管理。要求所有产生日志的机器产生日志后第一时间集中到日志分析系统上去，这就要求，1.要在Ubuntu上搭建好elk；2.在所有产生日志的机器上安装脚本，让他们产生日志后第一时间将日志发送到日志分析系统所在的机器上；3.产生的日志要被打上标签标明ID号和项目出处方便索引。本文首先介绍如何实现第一个要求。</p>
+<span id="more"></span>
+
+<h2 id="2-简介"><a href="#2-简介" class="headerlink" title="2. 简介"></a>2. 简介</h2><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>用filebeat收集日志，传送到logstash分析（本文是让logstash进行收集并分析log文件），再传送到elasticsearch，最后用kibana数据可视化的显示。</p>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><p>可以单一挨个儿部署elastic、logstash、kibana。也可以用docker-compose集中统一部署，集中统一停止三种服务。本文主要介绍后者集中统一部署。</p>
+<h4 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h4><ul>
+<li>elk&#x2F;<ul>
+<li>config&#x2F;<ul>
+<li>docker-compose.yml</li>
+<li>elasticsearch.yml</li>
+<li>kibana.yml</li>
+<li>logstash.yml</li>
+<li>logstash.conf</li>
+<li>filebeat.yml</li>
+</ul>
+</li>
+<li>date&#x2F;<ul>
+<li>password.txt</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>log&#x2F;</li>
+</ul>
+<h4 id="语言环境"><a href="#语言环境" class="headerlink" title="语言环境"></a>语言环境</h4><p>Java</p>
+<h2 id="3-环境配置"><a href="#3-环境配置" class="headerlink" title="3. 环境配置"></a>3. 环境配置</h2><p>java安装,先更新索引再安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install openjdk-11-jdk</span><br></pre></td></tr></table></figure>
+<p>检查java安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>docker安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</span><br></pre></td></tr></table></figure>
+<p>测试docker安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -v</span><br></pre></td></tr></table></figure>
+<p>docker-compose安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/v2.4.1/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>将可执行权限应用于二进制文件docker-compose</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>给docker-compose创建快捷方式（软链）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>测试docker-compose安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose version</span><br></pre></td></tr></table></figure>
+<p>创建elk文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir elk</span><br></pre></td></tr></table></figure>
+<p>elk文件夹下创建config文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir config</span><br></pre></td></tr></table></figure>
+<p>config目录下创建所有配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">touch docker-compose.yml</span><br><span class="line">touch elasticsearch.yml</span><br><span class="line">touch kibana.yml</span><br><span class="line">touch logstash.yml</span><br><span class="line">touch logstash.conf</span><br><span class="line">touch filebeat.yml</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-配置文件"><a href="#4-配置文件" class="headerlink" title="4. 配置文件"></a>4. 配置文件</h2><h4 id="4-1-docker-compose-yml文件配置"><a href="#4-1-docker-compose-yml文件配置" class="headerlink" title="4.1 docker-compose.yml文件配置"></a>4.1 docker-compose.yml文件配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#一定要管理好缩进</span><br><span class="line">version: &#x27;3.9&#x27; </span><br><span class="line">services:</span><br><span class="line">  elasticsearch:</span><br><span class="line">    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2 #镜像</span><br><span class="line">    container_name: elasticsearch #容器名称</span><br><span class="line">    restart: always #失败会尝试重启</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;9200:9200&quot;</span><br><span class="line">      - &quot;9300:9300&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      #&#x27;./&#x27;是指当前目录，明显我们是在elk目录下操作的。&#x27;../&#x27;是上一目录</span><br><span class="line">      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml</span><br><span class="line">      - esdata:/usr/share/elasticsearch/data #挂载在esdata卷上</span><br><span class="line">    environment:</span><br><span class="line">      - cluster.name=ELK-cluster #设置集群名称</span><br><span class="line">      - discovery.type=single-node #单一节点模式启动</span><br><span class="line">      - bootstrap.memory_lock=true</span><br><span class="line">      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot; #设置jvm内存大小</span><br><span class="line">    networks:</span><br><span class="line">      - elastic #依赖的网络</span><br><span class="line">    ulimits:</span><br><span class="line">      memlock:</span><br><span class="line">        soft: -1</span><br><span class="line">        hard: -1</span><br><span class="line">    mem_limit: 3g</span><br><span class="line"></span><br><span class="line">  kibana:</span><br><span class="line">    image: docker.elastic.co/kibana/kibana:7.16.2</span><br><span class="line">    container_name: kibana</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;5601:5601&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml</span><br><span class="line">    environment:</span><br><span class="line">      - ELASTICSEARCH_HOSTS=http://172.25.132.60:9200</span><br><span class="line">      - server.name=&quot;kibana&quot;</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">    depends_on:</span><br><span class="line">      - elasticsearch #会在依靠组件es启动之后再启动</span><br><span class="line"></span><br><span class="line">  logstash:</span><br><span class="line">    image: docker.elastic.co/logstash/logstash:7.16.2</span><br><span class="line">    #可以免除配置debug文件的日志输出，但似乎并没有什么卵用</span><br><span class="line">    labels:</span><br><span class="line">      co.elastic.logs/enabled: &quot;false&quot;</span><br><span class="line">    container_name: logstash</span><br><span class="line">    environment:</span><br><span class="line">      - MONITORING_ENABLED=&#x27;monitoring.enabled&#x27;</span><br><span class="line">      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;</span><br><span class="line">      - &quot;LS_OPTS=--config.reload.automatic&quot;</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;5044:5044&quot;</span><br><span class="line">      - &quot;9600:9600&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf</span><br><span class="line">      - ../log:/logs</span><br><span class="line">      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">    depends_on:</span><br><span class="line">      - elasticsearch</span><br><span class="line"></span><br><span class="line">  filebeat:</span><br><span class="line">    image: elastic/filebeat:7.16.2</span><br><span class="line">    container_name: filebeat</span><br><span class="line">    volumes:</span><br><span class="line">      - ./config/filebeat.yml:/usr/share/filebeat/filebeat.yml</span><br><span class="line">      - &quot;/var/lib/docker/containers:/var/lib/docker/containers:ro&quot;</span><br><span class="line">      - &quot;/var/run/docker.sock:/var/run/docker.sock:ro&quot;</span><br><span class="line">    networks:</span><br><span class="line">      - elastic</span><br><span class="line">    depends_on:</span><br><span class="line">      - elasticsearch</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  elastic:</span><br><span class="line">volumes:</span><br><span class="line">  esdata:</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-elasticsearch-yml文件配置"><a href="#4-2-elasticsearch-yml文件配置" class="headerlink" title="4.2 elasticsearch.yml文件配置"></a>4.2 elasticsearch.yml文件配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># es的默认配置</span><br><span class="line">network.host: 0.0.0.0</span><br><span class="line">http.port: 9200</span><br><span class="line">transport.port: 9300</span><br><span class="line">http.cors.enabled: true</span><br><span class="line">http.cors.allow-origin: &quot;*&quot;</span><br><span class="line">xpack.security.enabled: true</span><br><span class="line">xpack.security.http.ssl.enabled: false</span><br><span class="line">xpack.security.transport.ssl.enabled: false</span><br></pre></td></tr></table></figure>
+<h4 id="4-3-kibana-yml文件配置"><a href="#4-3-kibana-yml文件配置" class="headerlink" title="4.3 kibana.yml文件配置"></a>4.3 kibana.yml文件配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 总体配置</span><br><span class="line">server.host: &quot;0.0.0.0&quot;</span><br><span class="line">server.port: 5601</span><br><span class="line"># 刷新时间</span><br><span class="line">server.shutdownTimeout: &quot;5s&quot;</span><br><span class="line">elasticsearch.hosts: [ &quot;http://172.25.132.60:9200&quot; ]</span><br><span class="line">elasticsearch.username: &quot;elastic&quot;</span><br><span class="line">elasticsearch.password: &quot;9AXn5qi9zVzFs7NRs5Pw&quot;</span><br><span class="line"># 集群监控</span><br><span class="line">xpack.monitoring.ui.container.elasticsearch.enabled: true</span><br><span class="line"># 汉化</span><br><span class="line">i18n.locale: &quot;zh-CN&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="4-4-logstash-yml文件配置"><a href="#4-4-logstash-yml文件配置" class="headerlink" title="4.4 logstash.yml文件配置"></a>4.4 logstash.yml文件配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">node.name: logstash-203</span><br><span class="line"># 日志文件目录配置</span><br><span class="line">path.logs: /usr/share/logstash/pipeline/logstash.conf</span><br><span class="line"># 验证配置文件及存在性</span><br><span class="line">config.test_and_exit: false</span><br><span class="line"># 配置文件改变时是否自动加载</span><br><span class="line">config.reload.automatic: false</span><br><span class="line"># 重新加载配置文件间隔</span><br><span class="line">config.reload.interval: 5s</span><br><span class="line"># debug模式 开启后会打印解析后的配置文件 包括密码等信息 慎用</span><br><span class="line"># 需要同时配置日志等级为debug</span><br><span class="line"># config.debug: true</span><br><span class="line"># log.level: debug</span><br><span class="line">config.debug: false</span><br><span class="line"># 是否集群</span><br><span class="line">xpack.monitoring.enabled: true </span><br><span class="line"># xpack.management.enabled: true</span><br><span class="line">xpack.monitoring.elasticsearch.hosts: [ &quot;http://172.25.132.60:9200&quot; ]</span><br><span class="line">xpack.monitoring.elasticsearch.username: &quot;logstash_system&quot;</span><br><span class="line">xpack.monitoring.elasticsearch.password: &quot;m9pZRxR6caC2pIQkY4Zc&quot;</span><br><span class="line"># 将xpack.monitoring.elasticsearch.hosts注释掉，xpack.monitoring.enabled设置为false</span><br><span class="line"># xpack.monitoring.enabled: false</span><br><span class="line"># 若logstash不能实时主动连接到es，关闭xpack-management，并设置为false</span><br><span class="line">xpack.management.enabled: false </span><br><span class="line"># The bind address for the metrics REST endpoint.</span><br><span class="line">http.host: &quot;0.0.0.0&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="4-5-logstash-conf文件配置"><a href="#4-5-logstash-conf文件配置" class="headerlink" title="4.5 logstash.conf文件配置"></a>4.5 logstash.conf文件配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">	file&#123;</span><br><span class="line">		path =&gt; &quot;/logs/*.log&quot;</span><br><span class="line">		start_position =&gt; &quot;beginning&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">filter &#123;</span><br><span class="line">	grok&#123;</span><br><span class="line">		match =&gt; &#123;</span><br><span class="line">			&quot;message&quot; =&gt; &quot;(?&lt;datetime&gt;\d&#123;4&#125;-\d&#123;2&#125;-\d&#123;2&#125;\s\d&#123;2&#125;:\d&#123;2&#125;:\d&#123;2&#125;.\d&#123;3&#125;)  INFO %&#123;NUMBER:thread&#125; --- %&#123;SYSLOG5424SD:task&#125; %&#123;JAVACLASS:javaclass&#125;\s*: %&#123;SYSLOG5424SD:module&#125;\s*%&#123;GREEDYDATA:msg&#125;&quot;</span><br><span class="line">                 &#125;</span><br><span class="line">        		&#125; ### 通过grok匹配内容</span><br><span class="line">		date&#123;</span><br><span class="line">                match =&gt; [&quot;datetime&quot;,&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;,&quot;yyyy-MM-dd HH:mm:ss.SSSZ&quot;]</span><br><span class="line">                target =&gt; &quot;@timestamp&quot;</span><br><span class="line">        		&#125; ### 处理时间</span><br><span class="line">		mutate &#123;</span><br><span class="line">			convert =&gt; &#123;</span><br><span class="line">				&quot;bytes&quot; =&gt; &quot;integer&quot;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		geoip &#123;</span><br><span class="line">			source =&gt; &quot;clientip&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	 </span><br><span class="line">		useragent &#123;</span><br><span class="line">		     source =&gt; &quot;user_agent&quot;</span><br><span class="line">			target =&gt; &quot;useragent&quot;</span><br><span class="line">	  	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">output &#123;</span><br><span class="line">	stdout &#123;</span><br><span class="line">        codec =&gt; rubydebug</span><br><span class="line">    &#125;</span><br><span class="line">	elasticsearch &#123;</span><br><span class="line">	      hosts =&gt; [&quot;http://172.25.132.60:9200&quot;]</span><br><span class="line">	      index =&gt; &quot;logdb&quot;</span><br><span class="line">	      user =&gt; &quot;elastic&quot;</span><br><span class="line">	      password =&gt; &quot;9AXn5qi9zVzFs7NRs5Pw&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-6-filebeat-yml文件配置"><a href="#4-6-filebeat-yml文件配置" class="headerlink" title="4.6 filebeat.yml文件配置"></a>4.6 filebeat.yml文件配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">filebeat.config:</span><br><span class="line">  modules:</span><br><span class="line">    path: /home/youzu/elk/filebeat.yml</span><br><span class="line">    reload.enabled: false</span><br><span class="line"></span><br><span class="line">filebeat.autodiscover:</span><br><span class="line">  providers:</span><br><span class="line">    - type: docker</span><br><span class="line">      hints.enabled: true</span><br><span class="line"></span><br><span class="line">processors:</span><br><span class="line">- add_cloud_metadata: ~</span><br><span class="line">- add_docker_metadata: ~</span><br><span class="line"></span><br><span class="line">filebeat.inputs:</span><br><span class="line">- type: log</span><br><span class="line">  enabled: true</span><br><span class="line">  paths:</span><br><span class="line">  - /home/youzu/log/*.log</span><br><span class="line"></span><br><span class="line">output.logstash:</span><br><span class="line">  hosts: [&#x27;http://172.25.132.60:5044&#x27;]</span><br><span class="line"></span><br><span class="line">output.elasticsearch:</span><br><span class="line">  hosts: [&#x27;http://172.25.132.60:9200&#x27;]</span><br><span class="line">  username: &#x27;elastic&#x27;</span><br><span class="line">  password: &#x27;9AXn5qi9zVzFs7NRs5Pw&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-密码设置访问控制"><a href="#6-密码设置访问控制" class="headerlink" title="6 密码设置访问控制"></a>6 密码设置访问控制</h2><h3 id="试启动"><a href="#试启动" class="headerlink" title="试启动"></a>试启动</h3><p>修改系统设置，防止系统崩溃</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysctl.conf</span><br><span class="line">vm.max_map_count = 262144 #设置内存边界</span><br><span class="line">fs.file-max = 65536</span><br><span class="line">net.ipv4.ip_forward = 1 #允许不同ip之间转发信息</span><br><span class="line">sudo sysctl -p #便于保存配置</span><br></pre></td></tr></table></figure>
+<p>使用docker-compose启动容器集群会自动拉取所需的服务组件,我们来用命令行启动集群</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>检查镜像下载情况,有三大组件和对应版本号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<p>检查网络运行情况,有elk_elastic</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
+<p>浏览器访问kibana<code>localhost:5601</code><br>此时我们访问kibana是未就绪状态，这是因为我们还没有设置各服务的密码<br>回到命令行，初始化密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose exec -T es elasticsearch-setup-passwords auto --batch</span><br></pre></td></tr></table></figure>
+<p>将生成的密码保存到.&#x2F;data&#x2F;password.txt<br>随后修改logstash.yml, kibana.yml, logstash.conf, filebeat.yml的密码<br>重启服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>检查容器运行状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+<p>稍等一下，测试服务运行情况<br>elastic运行情况,浏览器访问<code>http://localhost:9200/</code><br>kibana运行情况，浏览器访问<code>http://localhost:5601/</code><br>logstash运行情况，浏览器访问<code>http://localhost:9600/</code><br>需要输入elastic账户密码登陆，有界面就说明没问题了，恭喜你！</p>
+<h2 id="7-kibana界面使用"><a href="#7-kibana界面使用" class="headerlink" title="7 kibana界面使用"></a>7 kibana界面使用</h2><blockquote>
+<p>左侧栏的Management-堆栈监测。监测es，kibana，logstash的运行状况<br>左侧栏的Management点击，找到kibana下的数据视图，创建索引，名称输入：logdb。之后去左侧栏点击Discover，选择logdb*，就可以显示到日志的监测信息了<br>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/haoxiaopengyou/article/details/124730807">https://blog.csdn.net/haoxiaopengyou/article/details/124730807</a><br>至此，在你的log文件夹下，添加或者创建新的.log文件都可以被监测到并显示</p>
+</blockquote>
+<h2 id="8-留个坑"><a href="#8-留个坑" class="headerlink" title="8 留个坑"></a>8 留个坑</h2><p>目前的filebeat并不能正常启动，但进行了相应的初始配置，之后用到了，配置好了再回来填坑。</p>
+<h2 id="9-附录"><a href="#9-附录" class="headerlink" title="9 附录"></a>9 附录</h2><h3 id="单一启动logstash注意事项"><a href="#单一启动logstash注意事项" class="headerlink" title="单一启动logstash注意事项"></a>单一启动logstash注意事项</h3><p>docker拉取logstash，注意拉取的版本要和elk其他服务的版本号一致<br>配置好logstash的.yml和.conf文件后（详见4.4，4.5），启动logstash，有几种启动方式。注意挂载路径不要错，依赖网络、依赖镜像查询docker network、docker image后再写，不要写错。<br>1.以简单交互模式测试启动logstash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm docker.elastic.co/logstash/logstash:7.16.2 -e &#x27;input&#123;stdin&#123;&#125;&#125;output&#123;stdout&#123;&#125;&#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p>2.加上挂载文件后稳定运行，可后台运行。-it 为容器分配一个交互式的伪终端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -it --restart=always --privileged=true --name=logstash -p 5044:5044 -p 9600:9600 -v /home/youzu/workspace/pipeline:/home/youzu/pipeline -v /home/youzu/workspace/elk/config/:/home/youzu/elk/config -e MONITORING_ENABLED=&#x27; monitoring.enabled&#x27; --net elk_elastic docker.elastic.co/logstash/logstash:7.16.2 -e &#x27;input&#123;stdin&#123;&#125;&#125;output&#123;stdout&#123;&#125;&#125;&#x27; </span><br></pre></td></tr></table></figure>
+<p>3.加上挂载文件后稳定运行，不可后台运行，方便测试用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --privileged=true --name=logstash -p 5044:5044 -p 9600:9600 -v /home/youzu/workspace/pipeline:/home/youzu/pipeline -v /home/youzu/workspace/elk/config/:/home/youzu/elk/config -v /home/youzu/workspace/log:/home/youzu/log -e MONITORING_ENABLED=&#x27; monitoring.enabled&#x27; --net elk_elastic docker.elastic.co/logstash/logstash:7.16.2 -e &#x27;input&#123;stdin&#123;&#125;&#125;output&#123;stdout&#123;&#125;&#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p>注意<br>‘input{stdin{}}output{stdout{}}’，千万别写成双引号！<br>退出bash脚本指令: exit</p>
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker stop XXX #停止在运行容器</span><br><span class="line">docker rm XXX #删除容器</span><br><span class="line">docker restart XXX #重启容器 </span><br><span class="line">docker logs -f XXX #查看容器内实时运行日志</span><br><span class="line">chmod -R 777 &#123;路径&#125; #提高文件夹权限</span><br><span class="line">docker exec #在运行的容器中执行命令</span><br><span class="line">docker exec -it elk /bin/bash #对容器进行交互命令</span><br><span class="line">挂载指令：-v 容器外映射目录（自己配置）：容器内部调用目录</span><br></pre></td></tr></table></figure>
+<h3 id="写给自己"><a href="#写给自己" class="headerlink" title="写给自己"></a>写给自己</h3><p>目录结构修改<br>docker-compose中所有挂载地址的修改</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>交个朋友<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/收款.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -195,7 +308,17 @@
 		</ul>
 	</div>
 
-          
+	<!--显示阅读次数-->
+	
+	  <a class="cloud-tie-join-count" href="/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/" style="color:gray;font-size:14px;">
+	    <span class="icon-smile"></span>
+	    <span id="busuanzi_container_page_pv">
+	      阅读量(<span id="busuanzi_value_page_pv"></span>)
+	    </span>
+	  </a>
+	
+
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -208,97 +331,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/27/hello-world/" class="archive-article-date">
-  	<time datetime="2022-12-27T06:34:28.907Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/12/27/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/27/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/26/Ubuntu-Hexo-GitHub/" class="archive-article-date">
-  	<time datetime="2022-12-26T10:37:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/26/Ubuntu-Hexo-GitHub/">Ubuntu+github+hexo</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Ubuntu+github搭建博客</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/github//" class="article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -331,8 +461,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
