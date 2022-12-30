@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>python转发本地log文件至外部机器的logstash | Hexo</title>
+  <title>Ubuntu_Python更新 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 内容首先实现访问外部机器的logstash，然后实现log文件的传输">
+  <meta name="description" content="1 背景Ubuntu本身就自带python2与python3系统，当python版本不支持当前库时要予以更新，本文将叙述更新步骤。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python转发本地log文件至外部机器的logstash">
-<meta property="og:url" content="http://example.com/2022/12/29/python%E8%BD%AC%E6%9C%AC%E5%9C%B0log%E8%87%B3%E5%A4%96%E6%9C%BAlogstash/index.html">
+<meta property="og:title" content="Ubuntu_Python更新">
+<meta property="og:url" content="http://example.com/2022/12/30/Ubuntu-Python%E6%9B%B4%E6%96%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1. 内容首先实现访问外部机器的logstash，然后实现log文件的传输">
+<meta property="og:description" content="1 背景Ubuntu本身就自带python2与python3系统，当python版本不支持当前库时要予以更新，本文将叙述更新步骤。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-12-29T08:11:51.000Z">
-<meta property="article:modified_time" content="2022-12-30T08:08:07.330Z">
+<meta property="article:published_time" content="2022-12-30T03:31:21.000Z">
+<meta property="article:modified_time" content="2022-12-30T08:40:03.409Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="python">
-<meta property="article:tag" content="logstash">
+<meta property="article:tag" content="Ubuntu">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -160,40 +160,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python转本地log至外机logstash" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Ubuntu-Python更新" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python转发本地log文件至外部机器的logstash
+      Ubuntu_Python更新
     </h1>
   
 
         
-        <a href="/2022/12/29/python%E8%BD%AC%E6%9C%AC%E5%9C%B0log%E8%87%B3%E5%A4%96%E6%9C%BAlogstash/" class="archive-article-date">
-  	<time datetime="2022-12-29T08:11:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-29</time>
+        <a href="/2022/12/30/Ubuntu-Python%E6%9B%B4%E6%96%B0/" class="archive-article-date">
+  	<time datetime="2022-12-30T03:31:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-内容"><a href="#1-内容" class="headerlink" title="1. 内容"></a>1. 内容</h2><p>首先实现访问外部机器的logstash，然后实现log文件的传输</p>
+        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1 背景"></a>1 背景</h2><p>Ubuntu本身就自带python2与python3系统，当python版本不支持当前库时要予以更新，本文将叙述更新步骤。</p>
 <span id="more"></span>
-<h2 id="2-win端访问logstash"><a href="#2-win端访问logstash" class="headerlink" title="2.win端访问logstash"></a>2.win端访问logstash</h2><p>关闭防火墙:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw disable #关闭</span><br><span class="line">sudo ufw status #检查状态</span><br></pre></td></tr></table></figure>
-<p>docker内部拉取的容器需要将内部端口映射到外部服务器端口上，才能被其他机器访问。除非不用docker挨个儿单独部署的才能省略这一步:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-p 5044:5044  #小写p表示docker会选择一个具体的宿主机端口映射到容器内部开放的网络端口上。</span><br><span class="line">-P   #大写P表示docker会随机选择一个宿主机端口映射到容器内部开放的网络端口上。</span><br></pre></td></tr></table></figure>
-<p>打开ip转发功能： </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysctl.conf</span><br><span class="line">net.ipv4.ip_forward = 1</span><br><span class="line"></span><br><span class="line">sysctl -p /etc/sysctl.conf #立即生效</span><br></pre></td></tr></table></figure>
-<p>更改服务器端logstash.conf的配置,增加input的渠道</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">udp &#123;</span><br><span class="line">	port =&gt; 9600</span><br><span class="line">    &#125;</span><br><span class="line">tcp &#123;</span><br><span class="line">        port =&gt; 5044</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>编写一个python文件，要求该程序每隔1秒检测一次log文件，若检测到有新内容则向目标机器逐行发送这些新内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># TCP</span><br><span class="line">import logging</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">from logstash_async.handler import AsynchronousLogstashHandler</span><br><span class="line"></span><br><span class="line">host = &#x27;172.25.132.60&#x27;</span><br><span class="line">port = 5044</span><br><span class="line"></span><br><span class="line">test_logger = logging.getLogger(&#x27;python-logging-test&#x27;)</span><br><span class="line">test_logger.setLevel(logging.DEBUG)</span><br><span class="line">async_handler = AsynchronousLogstashHandler(host, port, database_path=None)</span><br><span class="line">test_logger.addHandler(async_handler)</span><br><span class="line"></span><br><span class="line">path = r&#x27;D:\log\test.txt&#x27;</span><br><span class="line">file = open(path)</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    where = file.tell()</span><br><span class="line">    line = file.readline()</span><br><span class="line">    if not line:</span><br><span class="line">        time.sleep(1)</span><br><span class="line">        file.seek(where)</span><br><span class="line">    else:</span><br><span class="line">        print(&#x27;line:&#x27;, line)</span><br><span class="line">        test_logger.info(&quot;this is an info %s at %s&quot; % (line, time.time()))</span><br></pre></td></tr></table></figure>
-<p>访问elstic主页，查看数据接收情况</p>
-<h2 id="3-Linux端-Ubuntu系统-访问logstash"><a href="#3-Linux端-Ubuntu系统-访问logstash" class="headerlink" title="3 Linux端(Ubuntu系统)访问logstash"></a>3 Linux端(Ubuntu系统)访问logstash</h2>
+<h2 id="2-内容"><a href="#2-内容" class="headerlink" title="2 内容"></a>2 内容</h2><blockquote>
+<blockquote>
+<p>python更新至3.9版本<br>python优先使用python3<br>pip的更新使用<br>从网络（本文以github为例）上直接下载库并安装</p>
+</blockquote>
+</blockquote>
+<h2 id="3-python更新步骤"><a href="#3-python更新步骤" class="headerlink" title="3 python更新步骤"></a>3 python更新步骤</h2><p>python环境存在，但pip没有，安装一个pip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install python3-pip</span><br></pre></td></tr></table></figure>
+<p>首先更新我们的apt(Advanced Packaging Tool,Linux下的安装包管理工具)并为它增加一个组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install software-properties-common</span><br></pre></td></tr></table></figure>
+<p>其次需要更新软件源，因为Ubuntu 自带软件源的 Python 版本不是我们所要求的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add-apt-repository ppa:deadsnakes/ppa</span><br></pre></td></tr></table></figure>
+<p>之后就可以正常安装我们的python了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install python3.9</span><br></pre></td></tr></table></figure>
+<p>之后调整python3.9的优先级为2,设原版本python3.6的优先级为1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6  1</span><br><span class="line">update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9  2</span><br></pre></td></tr></table></figure>
+<p>调整python3的优先级为150，python2的优先级为100</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update-alternatives --install /usr/bin/python python /usr/bin/python2  100</span><br><span class="line">update-alternatives --install /usr/bin/python python /usr/bin/python3  150</span><br></pre></td></tr></table></figure>
+<p>此时输入python回车，就可以看到python3.9的交互界面，恭喜你，更新成功！</p>
+<blockquote>
+<p> 这里着重说明一下update-alternatives命令，为了处理程序多版本共存问题，若一个程序有多个版本，但又不想每次都覆盖更新，可以用这个命令来注册管理。<br>更新python后，发现我们的pip没有一并更新过来，发现系统无法解析pip命令了，这是用于新版本的python中还没有安装distutils，update-alternatives更改了系统链接使得python找不到它了，安装这一版本的distutils</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install python3.9-distutils</span><br></pre></td></tr></table></figure>
+<p>此时<code>pip --version</code>就能正常发出命令了<br>但是，此时pip安装的扩展包还不能被python环境所识别，需要将最新的路径导入python环境中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PYTHONPATH=/usr/local/lib/python3.9/dist-packages</span><br></pre></td></tr></table></figure>
+<p>检查是否添加成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $PYTHONPATH</span><br></pre></td></tr></table></figure>
+<p>执行成功后再import就成功了</p>
+<h2 id="4-手动下载依赖库并安装"><a href="#4-手动下载依赖库并安装" class="headerlink" title="4 手动下载依赖库并安装"></a>4 手动下载依赖库并安装</h2><p>由于pip不总是能帮我们找到依赖库，有时候需要手动下载并安装，介绍一下从github上拉取依赖库的方法，下载的目标地址不做要求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &#123;https://github.com/XXX.git&#125; &#123;下载的目标地址&#125;</span><br></pre></td></tr></table></figure>
+<p>下载成功后，进入到目标地址的文件夹下，进行库的安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#123;下载的目标地址&#125;/目标文件夹</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<p>至此，依赖包安装成功！</p>
+
       
 
       
@@ -236,7 +257,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">logstash</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
         		</li>
       		
 		</ul>
@@ -244,7 +265,7 @@
 
 	<!--显示阅读次数-->
 	
-	  <a class="cloud-tie-join-count" href="/2022/12/29/python%E8%BD%AC%E6%9C%AC%E5%9C%B0log%E8%87%B3%E5%A4%96%E6%9C%BAlogstash/" style="color:gray;font-size:14px;">
+	  <a class="cloud-tie-join-count" href="/2022/12/30/Ubuntu-Python%E6%9B%B4%E6%96%B0/" style="color:gray;font-size:14px;">
 	    <span class="icon-smile"></span>
 	    <span id="busuanzi_container_page_pv">
 	      阅读量(<span id="busuanzi_value_page_pv"></span>)
@@ -258,7 +279,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/elk//" class="article-tag-list-link color4">elk</a>
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
@@ -313,7 +334,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/12/29/python%E8%BD%AC%E6%9C%AC%E5%9C%B0log%E8%87%B3%E5%A4%96%E6%9C%BAlogstash/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/12/30/Ubuntu-Python%E6%9B%B4%E6%96%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -327,18 +348,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/12/30/Ubuntu-Python%E6%9B%B4%E6%96%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Ubuntu_Python更新
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">基于Ubuntu系统的elk搭建</div>
+    <a href="/2022/12/29/python%E8%BD%AC%E6%9C%AC%E5%9C%B0log%E8%87%B3%E5%A4%96%E6%9C%BAlogstash/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python转发本地log文件至外部机器的logstash</div>
       <i class="icon-circle-right"></i>
     </a>
   
