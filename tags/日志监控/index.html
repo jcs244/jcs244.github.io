@@ -6,20 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>基于Python检测文件夹中日志变化并输出至logstash | Hexo</title>
+  <title>Tag: 日志监控 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 前言 之前仅用pipline检测文件变化是有很大漏洞的，如果光标发生变化，就会死锁导致检测不能继续进行考虑对文件夹进行检测，目前的思路是检测文件改变时间或者文件大小的改变，而不再依靠光标的改变增加线程防止程序死锁。   好久不见，距离上次写博客已经过去一周了，终于完成了这个实时稳定监控日志文件夹的程序，付出了很多艰辛，也学习到了很多不曾涉及的内容（2023.01.10）">
-<meta property="og:type" content="article">
-<meta property="og:title" content="基于Python检测文件夹中日志变化并输出至logstash">
-<meta property="og:url" content="http://example.com/2023/01/04/%E5%9F%BA%E4%BA%8EPython%E6%A3%80%E6%B5%8B%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%97%A5%E5%BF%97%E5%8F%98%E5%8C%96%E5%B9%B6%E8%BE%93%E5%87%BA%E8%87%B3logstash/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/tags/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1 前言 之前仅用pipline检测文件变化是有很大漏洞的，如果光标发生变化，就会死锁导致检测不能继续进行考虑对文件夹进行检测，目前的思路是检测文件改变时间或者文件大小的改变，而不再依靠光标的改变增加线程防止程序死锁。   好久不见，距离上次写博客已经过去一周了，终于完成了这个实时稳定监控日志文件夹的程序，付出了很多艰辛，也学习到了很多不曾涉及的内容（2023.01.10）">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-01-04T10:58:39.000Z">
-<meta property="article:modified_time" content="2023-01-11T09:11:35.988Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="日志监控">
-<meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -160,143 +154,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-基于Python检测文件夹中日志变化并输出至logstash" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      基于Python检测文件夹中日志变化并输出至logstash
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2023" class="archive-year">2023</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2023/01/04/%E5%9F%BA%E4%BA%8EPython%E6%A3%80%E6%B5%8B%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%97%A5%E5%BF%97%E5%8F%98%E5%8C%96%E5%B9%B6%E8%BE%93%E5%87%BA%E8%87%B3logstash/" class="archive-article-date">
+  	<time datetime="2023-01-04T10:58:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-01-04</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2023/01/04/%E5%9F%BA%E4%BA%8EPython%E6%A3%80%E6%B5%8B%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%97%A5%E5%BF%97%E5%8F%98%E5%8C%96%E5%B9%B6%E8%BE%93%E5%87%BA%E8%87%B3logstash/">基于Python检测文件夹中日志变化并输出至logstash</a>
     </h1>
   
 
-        
-        <a href="/2023/01/04/%E5%9F%BA%E4%BA%8EPython%E6%A3%80%E6%B5%8B%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%97%A5%E5%BF%97%E5%8F%98%E5%8C%96%E5%B9%B6%E8%BE%93%E5%87%BA%E8%87%B3logstash/" class="archive-article-date">
-  	<time datetime="2023-01-04T10:58:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-01-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><blockquote>
-<p>之前仅用pipline检测文件变化是有很大漏洞的，如果光标发生变化，就会死锁导致检测不能继续进行<br>考虑对文件夹进行检测，目前的思路是检测文件改变时间或者文件大小的改变，而不再依靠光标的改变<br>增加线程防止程序死锁。</p>
-</blockquote>
-<blockquote>
-<p>好久不见，距离上次写博客已经过去一周了，终于完成了这个实时稳定监控日志文件夹的程序，付出了很多艰辛，也学习到了很多不曾涉及的内容（2023.01.10）</p>
-</blockquote>
-<span id="more"></span>
-
-<h2 id="2-内容"><a href="#2-内容" class="headerlink" title="2 内容"></a>2 内容</h2><h3 id="程序共分为四大模块"><a href="#程序共分为四大模块" class="headerlink" title="程序共分为四大模块"></a>程序共分为四大模块</h3><blockquote>
-<p>elk链接模块<br>初始化启动模块<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37218227/article/details/94589997">目录遍历检测模块</a><br>改动文件处理输出模块</p>
-</blockquote>
-<h3 id="程序实现关键技术"><a href="#程序实现关键技术" class="headerlink" title="程序实现关键技术"></a>程序实现关键技术</h3><blockquote>
-<p>利用时间戳检测文件是否发生变动<br>利用指针移动实现对日志文件内容的控制<br>利用多线程实现对多个日志文件的并行处理<br>利用记录文件记录时间戳和指针位置，防止系统崩溃丢失数据</p>
-</blockquote>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3 代码"></a>3 代码</h2><h3 id="3-1-import包模块"><a href="#3-1-import包模块" class="headerlink" title="3.1 import包模块"></a>3.1 import包模块</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># -*- TCP transmission for Linux -*-</span><br><span class="line"># -*- create on 2023/01/01 by JingCS -*-</span><br><span class="line">import datetime #提供用于处理日期和时间的类。</span><br><span class="line">import logging #用于日志处理</span><br><span class="line">import operator</span><br><span class="line">import os</span><br><span class="line">import os.path</span><br><span class="line">import shutil #提供了一系列对文件和文件集合的高阶操作。 特别是提供了一些支持文件拷贝和删除的函数。</span><br><span class="line">import stat</span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">from logstash_async.formatter import LogstashFormatter</span><br><span class="line">from logstash_async.handler import AsynchronousLogstashHandler</span><br><span class="line">from threading import Thread</span><br></pre></td></tr></table></figure>
-<h3 id="3-2-链接elk，字段定制化模块"><a href="#3-2-链接elk，字段定制化模块" class="headerlink" title="3.2 链接elk，字段定制化模块"></a>3.2 链接elk，字段定制化模块</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 与elk建立链接的模块</span><br><span class="line">host = &#x27;172.25.132.60&#x27;</span><br><span class="line">port = 5044</span><br><span class="line"></span><br><span class="line">path = r&#x27;./log/test.log&#x27;</span><br><span class="line"># file = open(path, encoding=&#x27;UTF-8&#x27;, errors=&#x27;ignore&#x27;)</span><br><span class="line"></span><br><span class="line">sPath = path.split(&#x27;/&#x27;)</span><br><span class="line"></span><br><span class="line">#建立基本链接的模块</span><br><span class="line">test_logger = logging.getLogger(name=path) #logging.Logger() 新建一个记录器，赋名</span><br><span class="line">test_logger.setLevel(logging.INFO) #指定最低的日志级别，低于lel的级别将被忽略。debug是最低的内置级别，critical为最高</span><br><span class="line">async_handler = AsynchronousLogstashHandler( #新建一个处理器，处理器将日志记录（由记录器创建）发送到适当的目标。</span><br><span class="line">    host,</span><br><span class="line">    port,</span><br><span class="line">    database_path=None)</span><br><span class="line">test_logger.addHandler(async_handler) # logging.addHandler()方法将指定的处理器 hdlr 添加到此记录器。</span><br><span class="line"></span><br><span class="line">#增加个人定制字段，与已存在字段合并</span><br><span class="line">logstash_formatter = LogstashFormatter( #可以创建多个处理器添加到一个记录器中</span><br><span class="line">    message_type=&#x27;python-logstash&#x27;,</span><br><span class="line">    extra_prefix=&#x27;dev&#x27;,</span><br><span class="line">    extra=dict(environment=&#x27;production&#x27;, projID=sPath[-2], logID=sPath[-1].split(&#x27;.&#x27;)[0]))</span><br><span class="line">async_handler.setFormatter(logstash_formatter) # 将此处理器的格式器增加logstash_formatter。</span><br><span class="line">test_logger.addHandler(async_handler)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>利用logstash_async模块创建的处理器对端口进行连接，该模块通过<a target="_blank" rel="noopener" href="https://github.com/eht16/python-logstash-async">下载python_logstash_async包</a>才能引入使用</p>
-</blockquote>
-<blockquote>
-<p>该模块还<a target="_blank" rel="noopener" href="https://python-logstash-async.readthedocs.io/en/stable/usage.html">提供了logstashFormatter方法增加用户私有字段</a></p>
-</blockquote>
-<blockquote>
-<p>模块的基本组件为记录器。记录器里面包括处理器，过滤器和格式器。分别作用为将日志转发至何处，哪些日志才能转发，转发的字段格式。</p>
-</blockquote>
-<h3 id="3-3-处理新增日志"><a href="#3-3-处理新增日志" class="headerlink" title="3.3 处理新增日志"></a>3.3 处理新增日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"># out.txt转Dic字典</span><br><span class="line">def outDic(out_path, myDic):</span><br><span class="line">    txt = open(out_path, &#x27;r&#x27;).readlines() #读取所有行并以列表形式输出</span><br><span class="line">    for row in txt:</span><br><span class="line">        (key, value) = row.split(&#x27;,&#x27;)[0], [row.split(&#x27;,&#x27;)[1], row.split(&#x27;,&#x27;)[2]]</span><br><span class="line">        myDic[key] = value</span><br><span class="line">    # txt.close()  # list&#x27; object has no attribute &#x27;close&#x27;   </span><br><span class="line"></span><br><span class="line"># Dic字典写入out.txt</span><br><span class="line">def dicOut(out_path, myDic):</span><br><span class="line">    f = open(out_path, &#x27;w&#x27;) #直接路径要加上引号。变量路径就不用了</span><br><span class="line">    for k,v in myDic.items(): # dic.items()方法可以直接分别读取字典的键值对</span><br><span class="line">        f.write(str(k)+&quot;,&quot;+str(v[0])+&quot;,&quot;+str(v[1])) #切分的时候已经带上换行符了</span><br><span class="line">    f.close()</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"># 文件全路径和对应最后修改时间写入到out.txt文档中；</span><br><span class="line">def add_log(path, myDic, file_path, file_name, out_path):</span><br><span class="line">    print(&#x27;thread %s is running...&#x27; % threading.current_thread().name)   </span><br><span class="line">    with open(file_path, encoding=&#x27;UTF-8&#x27;, errors=&#x27;ignore&#x27;) as f:</span><br><span class="line">        file_pos = int(myDic[file_name][1])</span><br><span class="line">        f.seek(file_pos, 0)</span><br><span class="line">        # time.sleep(5)</span><br><span class="line">        while True:    </span><br><span class="line">            line = f.readline() #指针会随着该方法的运行移动，移动到当前行的末尾</span><br><span class="line">            if not line:</span><br><span class="line">                f.seek(0, 2)</span><br><span class="line">                file_pos = f.tell()</span><br><span class="line">                file_time = os.stat(file_path).st_mtime  </span><br><span class="line">                outDic(out_path, myDic)</span><br><span class="line">                myDic[file_name][1] = str(file_pos) + &quot;\n&quot;  # 末尾字段配上换行符</span><br><span class="line">                myDic[file_name][0] = file_time</span><br><span class="line">                # print(&quot;my_dic:&quot;, myDic)</span><br><span class="line">                dicOut(out_path, myDic)</span><br><span class="line">                time.sleep(3)</span><br><span class="line">                line = f.readline()</span><br><span class="line">                if line:</span><br><span class="line">                    print(&quot;line:&quot;, line, end=&#x27;&#x27;)</span><br><span class="line">                    test_logger.info(&quot;this is an info %s&quot; % line) </span><br><span class="line">                    continue</span><br><span class="line">                break</span><br><span class="line">            else:</span><br><span class="line">                print(&quot;line:&quot;, line, end=&#x27;&#x27;)</span><br><span class="line">                test_logger.info(&quot;this is an info %s&quot; % line)                             </span><br><span class="line">        f.close() </span><br><span class="line">  </span><br><span class="line">    # 注意时间格式转换</span><br><span class="line">    # file_time = time.localtime(os.stat(root).st_mtime)</span><br><span class="line">    # file_time=date.strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;) #返回一个由显式格式字符串所指明的代表日期的字符串。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>对out.txt是将文件转为字典，这样对文件的处理就转为了对字典的处理,处理完成后再写入文件，完成对out.txt的更新</p>
-</blockquote>
-<blockquote>
-<p>对新增日志内容的操作，原理就是<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904153139937294">循环检测文件是否有新增行</a>，有则将该消息加入记录器中</p>
-</blockquote>
-<blockquote>
-<p>暂时没有新消息了就会对文件进行一波更新，更新最后修改时间以及指针位置。以及将指针放到最新更新的位置上</p>
-</blockquote>
-<blockquote>
-<p>但为了节约线程资源，防止过会儿有要增加的日志内容，设置一个线程睡眠时间，如果睡眠期间有新增内容则继续运行，没有则退出该线程</p>
-</blockquote>
-<h3 id="3-4-检测目标文件夹是否有新增日志"><a href="#3-4-检测目标文件夹是否有新增日志" class="headerlink" title="3.4 检测目标文件夹是否有新增日志"></a>3.4 检测目标文件夹是否有新增日志</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">def if_exist(path):</span><br><span class="line">    # 判断文件out.txt是否存在,不存在则创建</span><br><span class="line">    filename = &#x27;./out.txt&#x27;</span><br><span class="line">    if os.path.exists(filename):</span><br><span class="line">        message = &#x27;OK, the &quot;%s&quot; file exists.&#x27;</span><br><span class="line">    else:</span><br><span class="line">        message = &quot;Sorry, I cannot find the &#x27;%s&#x27; file..and I create it.&quot;</span><br><span class="line">        a = open(filename, &#x27;w&#x27;)</span><br><span class="line">        a.close()</span><br><span class="line">    # print(message % filename)</span><br><span class="line"></span><br><span class="line">    # 判断update文件夹是否存在,不存在则创建</span><br><span class="line">    files_name = &#x27;./update&#x27;</span><br><span class="line">    if os.path.exists(files_name):</span><br><span class="line">        message = &#x27;OK, the &quot;%s&quot; file exists.&#x27;</span><br><span class="line">    else:</span><br><span class="line">        message = &quot;Sorry, I cannot find the &#x27;%s&#x27; file.and I create it. &quot;</span><br><span class="line">        os.mkdir(files_name)</span><br><span class="line">    # print(message % files_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># path 待比较的文件夹路径</span><br><span class="line"># 返回生成的txt（包含更新或者添加的文件路径）的路径</span><br><span class="line">def log_compare(path, myDic, threads):</span><br><span class="line">    # 先确保out.txt存在</span><br><span class="line">    if_exist(path)</span><br><span class="line">    # 获取out.txt文件内容（文件全路径key和最后修改时间value），生成dict</span><br><span class="line">    out_path = &#x27;./out.txt&#x27;</span><br><span class="line">    outDic(out_path, myDic)</span><br><span class="line">    update_path = &#x27;./update/&#x27; </span><br><span class="line">    # print(&quot;myDic:&quot;, myDic)</span><br><span class="line">    # 创建以时间命名的文件和文件夹</span><br><span class="line">    setup_filename = str(datetime.datetime.now().strftime(&#x27;%Y%m%d%H%M%S&#x27;))  # 获取当前时间</span><br><span class="line">    # 更新threads</span><br><span class="line">    for thr in threads:</span><br><span class="line">        if not thr.is_alive(): #python3.9后不再支持isAlive()</span><br><span class="line">            threads.remove(thr)</span><br><span class="line">    # 判断key，比较value值是否变化rs/</span><br><span class="line">    # 原始需要有一个out.txt文件，才能比较value确定是否有更新</span><br><span class="line">    # 运行程序时，重新遍历一遍文件全路径和最后修改时间</span><br><span class="line">    for root, dirs, files in os.walk(path):</span><br><span class="line">        for name in files:</span><br><span class="line">            if name.split(&#x27;.&#x27;)[-1] != &#x27;log&#x27; : #仅处理log文件，对其他文件或swp的临时文件不予理财</span><br><span class="line">                continue</span><br><span class="line">            temp_path = os.path.join(root, name)</span><br><span class="line">            file_name = os.path.join(root.split(&#x27;/&#x27;)[-1], name)</span><br><span class="line">            time = os.stat(temp_path).st_mtime  # 获取最后修改时间</span><br><span class="line">            file_time = &#x27;%s&#x27; % time  # 加%s\n是为了与out.txt里值完全对应</span><br><span class="line">            # for...else语句，for循环若未受到break阻拦，执行else语句</span><br><span class="line">            for thr in threads:</span><br><span class="line">                if thr.getName() == file_name: # thread模块作为元素，而不是直接的线程名str,Name的N要大写</span><br><span class="line">                    break</span><br><span class="line">            else:        </span><br><span class="line">                if file_name in myDic:</span><br><span class="line">                    # myDic[file_name]旧最后修改时间，file_time新最后修改时间</span><br><span class="line">                    if not operator.eq(myDic[file_name][0], file_time):        </span><br><span class="line">                        print(file_name, file_time)  # 输出有变化的文件名及其对应的最后修改时间 </span><br><span class="line">                        t = threading.Thread(target=add_log, args=(path,myDic,temp_path, file_name, out_path), name=file_name) </span><br><span class="line">                        threads.append(t)</span><br><span class="line">                        print(&quot;threads:&quot;,threads)</span><br><span class="line">                        # t.start()</span><br><span class="line">                        # t.join(1) #参数为线程最大等待时间，默认为等待其他线程运行完成再开启线程</span><br><span class="line">                        # add_log(path, myDic)</span><br><span class="line">                else:</span><br><span class="line">                    with open(out_path, &#x27;a&#x27;) as f:</span><br><span class="line">                        f.write(&#x27;,&#x27;.join([&#x27;%s&#x27; % file_name, &#x27;%s&#x27; % file_time, &#x27;%s\n&#x27; % &#x27;0&#x27;]))</span><br><span class="line">                        f.close()</span><br><span class="line">                # print(&quot;add&quot;, file_name)</span><br><span class="line">            continue                </span><br><span class="line">    for thr in threads:</span><br><span class="line">        if not thr.is_alive():</span><br><span class="line">            thr.start() #此时线程之间包括主线程轮流获得cpu资源，会使多个线程同时处理一个文件，重复输出</span><br><span class="line">    #for thr in threads:</span><br><span class="line">        #thr.join() # 指定线程最多可霸占cpu资源时间，默认为直至死亡。但影响多线程效率</span><br><span class="line">    #print(&#x27;thread %s is ended...&#x27; % threading.current_thread().name) </span><br><span class="line">    print(&#x27;thread is change&#x27;)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>log_compare()模块主要思想是利用os.walk()方法浏览整个文件目录的所有文件，将文件的最后修改时间与out.txt内的保存时间对比，若发生改变则对该文件进行处理。</p>
-</blockquote>
-<blockquote>
-<p>处理的方式是创建新线程，一个目标程序是add_log()的线程，前提是该线程没有在正在运行的线程之列</p>
-</blockquote>
-<blockquote>
-<p>创建好的新线程加入到列表中，待主线程浏览完整个目录后在一起处理，并行运行。线程的优势在于可以并行处理文件，共用公共的资源</p>
-</blockquote>
-<blockquote>
-<p>python的线程并行并不是真正的并行，而是cpu的反复横跳。所以如果有优先执行需求的线程，可以用join函数指定优先执行与霸占时间</p>
-</blockquote>
-<blockquote>
-<p>新创建的文件，会在out.txt中进行简单的初始化</p>
-</blockquote>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/churximi/article/details/51043595">for…else…</a>大法太牛啦</p>
-</blockquote>
-<h3 id="3-5-程序初始化及程序启动"><a href="#3-5-程序初始化及程序启动" class="headerlink" title="3.5 程序初始化及程序启动"></a>3.5 程序初始化及程序启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">path_dir = r&#x27;./log&#x27;</span><br><span class="line">myDic = &#123;&#125;</span><br><span class="line">out_path = &#x27;./out.txt&#x27;</span><br><span class="line">print(&quot;out_path:&quot;, out_path)</span><br><span class="line">with open(out_path, &#x27;w&#x27;) as f: #初始化</span><br><span class="line">    f.close()</span><br><span class="line">threads = []</span><br><span class="line">for root, dirs, files in os.walk(path_dir):</span><br><span class="line">    for name in files:</span><br><span class="line">        if name.split(&#x27;.&#x27;)[-1] != &#x27;log&#x27; :</span><br><span class="line">            continue</span><br><span class="line">        temp_path = os.path.join(root, name)</span><br><span class="line">        file_name = os.path.join(root.split(&#x27;/&#x27;)[-1], name)</span><br><span class="line">        with open(temp_path, encoding=&#x27;UTF-8&#x27;, errors=&#x27;ignore&#x27;) as f:</span><br><span class="line">            f.seek(0, 2)</span><br><span class="line">            file_pos = f.tell()</span><br><span class="line">        # print(&quot;file_name:&quot;, file_name)</span><br><span class="line">        file_time = os.stat(temp_path).st_mtime</span><br><span class="line">        with open(out_path, &#x27;a&#x27;) as f:</span><br><span class="line">            f.write(&#x27;,&#x27;.join([&#x27;%s&#x27; % file_name, &#x27;%s&#x27; % file_time, &#x27;%s\n&#x27; % file_pos]))</span><br><span class="line">            f.close()</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    log_compare(path_dir, myDic, threads)</span><br><span class="line">    time.sleep(6)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>初始化要指定监测的目标文件夹，创建公用的用于处理out.txt的字典，创建out.txt的路径，创建线程池的列表</p>
-</blockquote>
-<blockquote>
-<p>随后对文件夹进行遍历，初始化out.txt的内容，包括文件名称，最后修改时间以及指针的最新位置</p>
-</blockquote>
-<blockquote>
-<p>随后主线程进入while True，每隔一段时间(示例中为6秒)检测一下有没有文件更新</p>
-</blockquote>
-<h2 id="4-多说两句"><a href="#4-多说两句" class="headerlink" title="4 多说两句"></a>4 多说两句</h2><blockquote>
-<p>互斥锁：由于线程之间是进行随机调度，并且每个线程可能只执行n条执行之后，当多个线程同时修改同一条数据时可能会出现脏数据。但由于此程序没有每条线程单独处理一个文件的读取，不会出现同时修改一个文件的情况，所以互斥锁以后再考虑。</p>
-</blockquote>
-<blockquote>
-<p>线程池：线程池在系统启动时即创建大量空闲的线程，程序只要将一个函数提交给线程池，线程池就会启动一个空闲的线程来执行它。当该函数执行结束后，该线程并不会死亡，而是再次返回到线程池中变成空闲状态，等待执行下一个函数。线程池可以很好地提升性能，尤其是当程序中需要创建大量生存期很短暂的线程时，更应该考虑使用线程池。线程池可以有效地控制系统中并发线程的数量。当系统中包含有大量的并发线程时，会导致系统性能急剧下降，甚至导致 Python 解释器崩溃，而线程池的最大线程数参数可以控制系统中并发线程的数量不超过此数。实际测试后会根据情况考虑是否改用线程池的方法。</p>
-</blockquote>
-<blockquote>
-<p>最佳线程数目 &#x3D; （（线程等待时间+线程CPU时间）&#x2F;线程CPU时间 ）* CPU数目</p>
-</blockquote>
-<blockquote>
-<p>python伪多线程，适合IO密集型任务。如果是一个计算为主的程序（专业一点称为CPU密集型程序），这一点确实是比较吃亏的，每个线程运行一遍，就相当于单线程再跑，甚至比单线程还要慢——CPU切换线程的上下文也是要有开销的。但是，如果是一个磁盘或网络为主的程序（IO密集型）就不同了。一个线程处在IO等待的时候，另一个线程还可以在CPU里面跑，有时候CPU闲着没事干，所有的线程都在等着IO，这时候他们就是同时的了，而单线程的话此时还是在一个一个等待的。我们都知道IO的速度比起CPU来是慢到令人发指的，python的多线程就在这时候发挥作用了。比方说多线程网络传输，多线程往不同的目录写文件，等等</p>
-</blockquote>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Castlehe/article/details/122562823">yield读取GB级别的txt文本文件</a>：使用.readlines()方法会直接开辟一个列表逐行存储所有的文本内容，内存占用量非常之大。所以，在文本极大的情况下考虑使用<a target="_blank" rel="noopener" href="https://blog.csdn.net/mieleizhi0522/article/details/82142856">yield的方法生成迭代器</a>，逐行读取文本内容。</p>
-</blockquote>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>交个朋友<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/收款.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -312,17 +199,7 @@
 		</ul>
 	</div>
 
-	<!--显示阅读次数-->
-	
-	  <a class="cloud-tie-join-count" href="/2023/01/04/%E5%9F%BA%E4%BA%8EPython%E6%A3%80%E6%B5%8B%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%97%A5%E5%BF%97%E5%8F%98%E5%8C%96%E5%B9%B6%E8%BE%93%E5%87%BA%E8%87%B3logstash/" style="color:gray;font-size:14px;">
-	    <span class="icon-smile"></span>
-	    <span id="busuanzi_container_page_pv">
-	      阅读量(<span id="busuanzi_value_page_pv"></span>)
-	    </span>
-	  </a>
-	
-
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -335,104 +212,17 @@
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/01/04/%E5%9F%BA%E4%BA%8EPython%E6%A3%80%E6%B5%8B%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%97%A5%E5%BF%97%E5%8F%98%E5%8C%96%E5%B9%B6%E8%BE%93%E5%87%BA%E8%87%B3logstash/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
   
   
-    <a href="/2022/12/30/Ubuntu-Python%E6%9B%B4%E6%96%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Ubuntu_Python更新</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -465,9 +255,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
