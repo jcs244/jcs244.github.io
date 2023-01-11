@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: Ubuntu+elk搭建日志管理系统 | Hexo</title>
+  <title>Ubuntu+virtualenv安装及使用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/Ubuntu-elk%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
+  <meta name="description" content="1 内容 最近学到了一个新方法virtualenv，便于.py程序的迁移，该方法可以单独隔离出一个单独的环境供单一程序运行，除了方便迁移外还可以隔离python多版本的混乱。   安装virtualenv使用virtualenv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu+virtualenv安装及使用">
+<meta property="og:url" content="http://example.com/2023/01/11/Ubuntu-virtualenv%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 内容 最近学到了一个新方法virtualenv，便于.py程序的迁移，该方法可以单独隔离出一个单独的环境供单一程序运行，除了方便迁移外还可以隔离python多版本的混乱。   安装virtualenv使用virtualenv">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-11T10:28:01.000Z">
+<meta property="article:modified_time" content="2023-01-11T10:48:17.716Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="virtualenv">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -154,71 +160,219 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Ubuntu-virtualenv安装及使用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2022-12-28T03:48:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/28/%E5%9F%BA%E4%BA%8EUbuntu%E7%B3%BB%E7%BB%9F%E7%9A%84elk%E6%90%AD%E5%BB%BA/">基于Ubuntu系统的elk搭建</a>
+    <h1 class="article-title" itemprop="name">
+      Ubuntu+virtualenv安装及使用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2023/01/11/Ubuntu-virtualenv%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2023-01-11T10:28:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-内容"><a href="#1-内容" class="headerlink" title="1 内容"></a>1 内容</h2><blockquote>
+<p>最近学到了一个新方法virtualenv，便于.py程序的迁移，该方法可以单独隔离出一个单独的环境供单一程序运行，除了方便迁移外还可以隔离python多版本的混乱。</p>
+</blockquote>
+<blockquote>
+<p>安装virtualenv<br>使用virtualenv </p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2 步骤"></a>2 步骤</h2><p>安装pip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-pip</span><br></pre></td></tr></table></figure>
+<p>安装virtualenv</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip3 install virtualenv </span><br></pre></td></tr></table></figure>
+<p>接下来创建并初始化一个文件夹，供目标程序运行。可以指定python运行版本，环境名称任意(示例为myenv)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv -p /usr/bin/python3.9 myenv</span><br></pre></td></tr></table></figure>
+<p>激活虚拟环境，进入虚拟环境交互界面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source myenv/bin/activate</span><br></pre></td></tr></table></figure>
+<p>或者进入fish shell交互界面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source myenv/bin/activate.fish</span><br></pre></td></tr></table></figure>
+<p>接下来，在myenv的虚拟环境下用pip安装目标程序所使用的所有第三方库。可以在下列目录中看到自己安装的第三方库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ./myenv/lib/python3.9/site-packages</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+<p>做完上述工作便可以在这个虚拟环境下运行目标程序了，不仅与外界环境隔离开来，还可以随时将myenv文件夹打包带走在任意机器上使用该环境。</p>
+<p>最后如果想退出该虚拟环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>交个朋友<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/收款.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Ubuntu+elk搭建日志管理系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ubuntu</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">virtualenv</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+	<!--显示阅读次数-->
+	
+	  <a class="cloud-tie-join-count" href="/2023/01/11/Ubuntu-virtualenv%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" style="color:gray;font-size:14px;">
+	    <span class="icon-smile"></span>
+	    <span id="busuanzi_container_page_pv">
+	      阅读量(<span id="busuanzi_value_page_pv"></span>)
+	    </span>
+	  </a>
+	
+
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/elk//" class="article-tag-list-link color4">elk</a>
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/01/11/Ubuntu-virtualenv%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2023/01/04/%E5%9F%BA%E4%BA%8EPython%E6%A3%80%E6%B5%8B%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%97%A5%E5%BF%97%E5%8F%98%E5%8C%96%E5%B9%B6%E8%BE%93%E5%87%BA%E8%87%B3logstash/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于Python检测文件夹中日志变化并输出至logstash</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -251,9 +405,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
