@@ -16,7 +16,7 @@
 <meta property="og:description" content="1. 内容首先实现访问外部机器的logstash，然后实现log文件的传输">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-12-29T08:11:51.000Z">
-<meta property="article:modified_time" content="2022-12-30T09:10:10.972Z">
+<meta property="article:modified_time" content="2023-01-04T10:55:23.166Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="logstash">
@@ -195,6 +195,12 @@
 <p>访问elstic主页，查看数据接收情况</p>
 <h2 id="3-Linux端-Ubuntu系统-访问logstash"><a href="#3-Linux端-Ubuntu系统-访问logstash" class="headerlink" title="3 Linux端(Ubuntu系统)访问logstash"></a>3 Linux端(Ubuntu系统)访问logstash</h2><blockquote>
 <p>win端与linux端的差别还是很大的<br>首先就是Ubuntu自带的python版本太低，运行不了logstash_async这一依赖包，需要<a target="_blank" rel="noopener" href="https://jcs244.github.io/2022/12/30/Ubuntu-Python%E6%9B%B4%E6%96%B0/">更新python的版本</a>(详见我的上一片博客)。<br>其次是pip根本拉取不了logstash_async这个包，需要拉取python_logstash_async包，才能导入logstash_async<br>再次是linux端的路径以及路径语法与win端有差别，需要修改。<br>除了以上问题需要修改以外，其他代码可以直接移植，完美的跑起来了！<br>测试的时候注意，Ubuntu自带的文本编辑器并不能实时保存读写数据，需要用vim测试.log文件的实时数据更新。</p>
+</blockquote>
+<h2 id="4-通过python代码，增加elk字段"><a href="#4-通过python代码，增加elk字段" class="headerlink" title="4 通过python代码，增加elk字段"></a>4 通过python代码，增加elk字段</h2><p>仅有log文件中的内容被读到message是无法满足查询需要的，若想在elk中增加可编辑的字段，需要以下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from logstash_async.formatter import LogstashFormatter</span><br><span class="line"></span><br><span class="line">logstash_formatter = LogstashFormatter(</span><br><span class="line">    message_type=&#x27;python-logstash&#x27;,</span><br><span class="line">    extra_prefix=&#x27;dev&#x27;,</span><br><span class="line">    extra=dict(environment=&#x27;production&#x27;, projID=111, logID=112))</span><br><span class="line">async_handler.setFormatter(logstash_formatter)</span><br><span class="line">test_logger.addHandler(async_handler)</span><br></pre></td></tr></table></figure>
+<p>其中Formatter是logging库的重要组件，它是一个格式器，可以在日志配置中指定额外的字典，其中包含应用程序名称、环境等静态值。这些值将与传入的任何额外字典项合并将调用记录到配置的额外前缀中。</p>
+<h2 id="5-中文被TCP传输成Unicode编码问题"><a href="#5-中文被TCP传输成Unicode编码问题" class="headerlink" title="5 中文被TCP传输成Unicode编码问题"></a>5 中文被TCP传输成Unicode编码问题</h2><blockquote>
+<p>在logstash.conf中，修改codec字段: <code>codec =&gt; &quot;json&quot;</code><br>其他网上的方法，比如input，output，.py文件，es.yml等等存在数据转发可能的地方，将编码方式统一改为UTF-8，试过了，不起作用。</p>
 </blockquote>
 
       
@@ -384,7 +390,7 @@
   <div class="outer">
     <div id="footer-info">
       <div class="footer-left">
-        &copy; 2022 John Doe
+        &copy; 2023 John Doe
       </div>
       <div class="footer-right">
         <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
