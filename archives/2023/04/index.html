@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>博客迁移Ubantu➡win10 | LittleLittleSam</title>
+  <title>Archives: 2023/4 | LittleLittleSam</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.背景 结束实习后，需要再自己的电脑上搭建一个博客平台来继续学习，就需要一个博客迁移步骤了">
-<meta property="og:type" content="article">
-<meta property="og:title" content="博客迁移Ubantu➡win10">
-<meta property="og:url" content="http://example.com/2023/03/25/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%EF%BC%9AUbantu%E8%BD%ACwin10/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="LittleLittleSam">
+<meta property="og:url" content="http://example.com/archives/2023/04/index.html">
 <meta property="og:site_name" content="LittleLittleSam">
-<meta property="og:description" content="1.背景 结束实习后，需要再自己的电脑上搭建一个博客平台来继续学习，就需要一个博客迁移步骤了">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-25T10:58:39.000Z">
-<meta property="article:modified_time" content="2023-03-26T08:00:12.026Z">
 <meta property="article:author" content="JCS">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="github">
+<meta property="article:tag" content="note">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="LittleLittleSam" type="application/atom+xml">
@@ -160,261 +155,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-博客迁移：Ubantu转win10" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      博客迁移Ubantu➡win10
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2023" class="archive-year">2023</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2023/04/03/Elastic-note/" class="archive-article-date">
+  	<time datetime="2023-04-03T06:25:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-03</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2023/04/03/Elastic-note/">Elastic_note</a>
     </h1>
   
 
-        
-        <a href="/2023/03/25/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%EF%BC%9AUbantu%E8%BD%ACwin10/" class="archive-article-date">
-  	<time datetime="2023-03-25T10:58:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h2><blockquote>
-<p>结束实习后，需要再自己的电脑上搭建一个博客平台来继续学习，就需要一个博客迁移步骤了</p>
-</blockquote>
-<span id="more"></span>
-
-<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h2><h3 id="2-1-下载官网nodejs安装包（包含了node和npm）"><a href="#2-1-下载官网nodejs安装包（包含了node和npm）" class="headerlink" title="2.1.下载官网nodejs安装包（包含了node和npm）"></a>2.1.下载官网nodejs安装包（包含了node和npm）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ https://nodejs.org/en/</span><br></pre></td></tr></table></figure>
-
-<p>验证是否安装成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
-
-<p>在安装文件夹下node_modules文件夹的同级目录下新建两个文件夹</p>
-<ul>
-<li>node_cache</li>
-<li>node_global</li>
-</ul>
-<p>设置环境变量如下</p>
-<ul>
-<li>用户变量path添加：D:\nodejs\node_global\</li>
-<li>系统变量新建 NODE_PATH:D: \nodejs\node_global\node_modules</li>
-<li>系统变量path添加：D:\nodejs、D:\nodejs\node_modules、D:\nodejs\node_global\node_modules</li>
-</ul>
-<p>git bash下配置两个文件夹，指定npm的模块路径和缓存路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> prefix <span class="string">&quot;D:\nodejs\node_global&quot;</span></span><br><span class="line">npm config <span class="built_in">set</span> cache <span class="string">&quot;D:\nodejs\node_cache&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>设置npm的阿里下载源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
-
-<p>设置完输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
-
-<p>删除npmrc文件（清除缓存，防止npm的4048err）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">目标目录：C:\Users\&#123;账户&#125;\下的.npmrc文件</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-hexo下载配置"><a href="#2-2-hexo下载配置" class="headerlink" title="2.2.hexo下载配置"></a>2.2.hexo下载配置</h3><p>hexo的下载，hexo-cli是hexo的指令集</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p>下载成功检查</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -version</span><br></pre></td></tr></table></figure>
-
-<p>新建文件夹hexo，cd进入后在当前目录下初始化hexo</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-
-<p>将hexo目录下的source、themes文件夹拷贝过来。替换_config.yml文件</p>
-<h3 id="2-3-git与github的配置"><a href="#2-3-git与github的配置" class="headerlink" title="2.3.git与github的配置"></a>2.3.git与github的配置</h3><p>设置git的用户名与邮箱</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;jcs244&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;注册github用的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>绑定sshkey</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C 注册github用的邮箱 <span class="comment"># -C后面加你在github的用户名邮箱，这样公钥才会被github认可</span></span><br><span class="line">less ~/.ssh/id_rsa.pub <span class="comment"># 查看公钥内容稍后加入Github账户的sshkey中,连按三次回车</span></span><br></pre></td></tr></table></figure>
-
-<p>打开github网页，头像→setting→SSH and GPG keys→新建SSH KEY，将上述公钥粘贴进去</p>
-<p>测试是否添加成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment">#之后需要输入yes</span></span><br></pre></td></tr></table></figure>
-
-<p>配置hexo-deployer-git –save，使hexo可以将静态网站部署到git上</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>交个朋友<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/收款.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Sharding</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">BlockChain</a>
         		</li>
       		
 		</ul>
 	</div>
 
-	<!--显示阅读次数-->
-	
-	  <a class="cloud-tie-join-count" href="/2023/03/25/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%EF%BC%9AUbantu%E8%BD%ACwin10/" style="color:gray;font-size:14px;">
-	    <span class="icon-smile"></span>
-	    <span id="busuanzi_container_page_pv">
-	      阅读量(<span id="busuanzi_value_page_pv"></span>)
-	    </span>
-	  </a>
-	
-
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        			<a href="/categories/paper//" class="article-tag-list-link color1">paper</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/03/25/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%EF%BC%9AUbantu%E8%BD%ACwin10/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2023/03/28/BrokerChain%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          BrokerChain论文笔记
-        
-      </div>
-    </a>
   
   
-    <a href="/2023/01/12/%E5%AE%9E%E4%B9%A0%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">实习经验总结</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -447,8 +256,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -157,6 +157,221 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Elastic-note" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/03/Elastic-note/">Elastic_note</a>
+    </h1>
+  
+
+        
+        <a href="/2023/04/03/Elastic-note/" class="archive-article-date">
+  	<time datetime="2023-04-03T06:25:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文：<a href="/paper/Elastic.pdf">Elastic</a></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Sharding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">BlockChain</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+	<!--显示阅读次数-->
+	
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/paper//" class="article-tag-list-link color1">paper</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/04/03/Elastic-note/">展开瞅瞅 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-BrokerChain论文笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/03/28/BrokerChain%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">BrokerChain论文笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2023/03/28/BrokerChain%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2023-03-28T08:55:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<p>欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡</p>
+<p>解决方法</p>
+<ul>
+<li>对账号状态进行划分，在协议层进行帐号分隔</li>
+<li>跨分片事务处理机制，保证跨分片TXs的最终原子性</li>
+</ul>
+<p>目标：产生更少的跨分片TXs，确保区块链分片之间的额负载均衡</p>
+<p>区块链主流交易模式</p>
+<ul>
+<li>账户&#x2F;余额模式：资产增加账户资产余额就增加，资产减少账户余额资产就减少，缺点是容易遭受双花攻击（由于卖家还没收到交易就交付了商品）</li>
+<li>UTXO模式：只有交易输出，内存占用小，交易明细也可追溯，很难伪造</li>
+</ul>
+<p>BrokerChain主要内容</p>
+<ul>
+<li><p>基于账户&#x2F;余额模式</p>
+</li>
+<li><p>在区块链体系结构的协议层建立账户细分机制：将账户的额余额平摊到各个分片中（交易活跃账户，可能会参与大量的TXs。这种活跃的账号必然会导致火爆的碎片），使跨分片事务变成分片内事务。与用户将存款自主存储在多个较小账户的情况之间的区别在于，BrokerChain分割的账户的地址都是相同的。也就是说，BrokerChain协议使用相同的帐户地址存储位于不同分片的帐户的存款。</p>
+</li>
+<li><p>引入中介账户，基本要求是其账户中有足够数量的代币。将分片1和2中的A→B的交易分成两个片内交易A→C和C→B，其中C为激励机制产生的经纪人账户。以上归为四个步骤</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>A创建原始账户，</li>
+<li>C创建1中的交易，</li>
+<li>广播交易，</li>
+<li>2接收到广播后C确认1中的交易并创建2中的交易</li>
+<li>确认2并更新账本信息，如果分片 1 的当前块高度小于 Hcurrent + Hlock&#x2F;2，它将被打包到一个新块中</li>
+</ul>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Sharding</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">BlockChain</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+	<!--显示阅读次数-->
+	
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/paper//" class="article-tag-list-link color1">paper</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/03/28/BrokerChain%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">展开瞅瞅 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-博客迁移：Ubantu转win10" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1020,6 +1235,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Sharding</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">BlockChain</a>
               </li>
             
             <div class="clearfix"></div>
