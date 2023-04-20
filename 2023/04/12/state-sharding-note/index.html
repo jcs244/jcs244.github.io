@@ -6,25 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>state_sharding_note | LittleLittleSam</title>
+  <title>State_sharding_note | LittleLittleSam</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="问题提出： 跨分片TX比例高。当分片数量增加时，跨分片 TX 比率增加并接近 100%。大量的跨分片 TX 可能会降低系统吞吐量并增加分片间通信成本。当关联性强的账户分配到不同的分片时，会诱发大量的跨分片交易。 不平衡的 TX 工作负载极大地限制了区块链分片系统的可扩展性。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="state_sharding_note">
-<meta property="og:url" content="http://example.com/2023/04/12/state-sharding-note/index.html">
+<meta property="og:title" content="State_sharding_note">
+<meta property="og:url" content="http://example.com/2023/04/12/State-sharding-note/index.html">
 <meta property="og:site_name" content="LittleLittleSam">
 <meta property="og:description" content="问题提出： 跨分片TX比例高。当分片数量增加时，跨分片 TX 比率增加并接近 100%。大量的跨分片 TX 可能会降低系统吞吐量并增加分片间通信成本。当关联性强的账户分配到不同的分片时，会诱发大量的跨分片交易。 不平衡的 TX 工作负载极大地限制了区块链分片系统的可扩展性。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/%5Cimg%5CStateSharding.png">
-<meta property="og:image" content="http://example.com/%5Cimg%5CStateSharding2.png">
-<meta property="og:image" content="http://example.com/%5Cimg%5CUnanimousThenMajority.png">
+<meta property="og:image" content="http://example.com/img/test.png">
+<meta property="og:image" content="http://example.com/img/test.png">
+<meta property="og:image" content="http://example.com/img/StateSharding.png">
+<meta property="og:image" content="http://example.com/img/StateSharding2.png">
+<meta property="og:image" content="http://example.com/img/UnanimousThenMajority.png">
 <meta property="article:published_time" content="2023-04-12T02:54:38.000Z">
-<meta property="article:modified_time" content="2023-04-18T10:05:42.622Z">
+<meta property="article:modified_time" content="2023-04-20T03:05:49.920Z">
 <meta property="article:author" content="JCS">
 <meta property="article:tag" content="Sharding">
 <meta property="article:tag" content="BlockChain">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/%5Cimg%5CStateSharding.png">
+<meta name="twitter:image" content="http://example.com/img/test.png">
   
     <link rel="alternative" href="/atom.xml" title="LittleLittleSam" type="application/atom+xml">
   
@@ -164,19 +166,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-state-sharding-note" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-State-sharding-note" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      state_sharding_note
+      State_sharding_note
     </h1>
   
 
         
-        <a href="/2023/04/12/state-sharding-note/" class="archive-article-date">
+        <a href="/2023/04/12/State-sharding-note/" class="archive-article-date">
   	<time datetime="2023-04-12T02:54:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-12</time>
 </a>
         
@@ -203,13 +205,17 @@
 </li>
 </ul>
 <h3 id="问题解决："><a href="#问题解决：" class="headerlink" title="问题解决："></a>问题解决：</h3><ul>
-<li><p>弹性地安排位于不同分片中的所有帐户，同时考虑它们的相关性。</p>
+<li><p>弹性地安排位于不同分片中的所有帐户，同时考虑它们的相关性。<a href="/img/test.png">加号test</a></p>
 </li>
-<li><p>设计了一个弹性分片协议。 W-shard负责处理交易并在每个时期生成一定数量的整理块；M-分片负责运行账户分区算法，并通过在每个时期生成一个状态块来维护整个区块链账本的最新状态。<img src="/%5Cimg%5CStateSharding.png" alt="image-20230412194441793"></p>
+<li><p><img src="/img/test.png" alt="加号test"></p>
+</li>
+<li><p><img src="/img/test.png" alt="加号test"></p>
+</li>
+<li><p>设计了一个弹性分片协议。 W-shard负责处理交易并在每个时期生成一定数量的整理块；M-分片负责运行账户分区算法，并通过在每个时期生成一个状态块来维护整个区块链账本的最新状态<img src="/img/StateSharding.png" alt="image-20230412194441793"></p>
 </li>
 <li><p>W-shards 收集新到达的交易并并行生成整理块。然后，将这些事务块和待处理的 TX 同步到 M-shard；M-shard通过读取本地TX池来建立账户网络，M-shard 运行 CLPA 算法在帐户网络上执行社区感知分区；M-shard对分区结果和分片区块链的状态达成共识，生成状态块；每个 W-shard 根据状态块更新其账本状态，并生成一个参考块作为下一个纪元的创世块；</p>
 </li>
-<li><p>状态块的数据结构如下<img src="/%5Cimg%5CStateSharding2.png" alt="image-20230412201304849">.H(B1||B2||..||BK)被记录在一个状态块的头部，表示存储在最长合法链上的最新排序规则块；一个帐户地址和帐户的目标分片的 ID 组成一个映射项，通过将这样的分区结果的根哈希记录在状态块的头部，形成一条可以追踪账户转移的默克尔路径；所有 W-shards 重新配置后的账本状态（分片ID、余额、随机数等)也需要记录在状态块的头部，旨在帮助 W-shards 同步和验证整个账本的状态。</p>
+<li><p>状态块的数据结构如下<img src="/img/StateSharding2.png" alt="image-20230412201304849">  H(B1||B2||..||BK)被记录在一个状态块的头部，表示存储在最长合法链上的最新排序规则块；一个帐户地址和帐户的目标分片的 ID 组成一个映射项，通过将这样的分区结果的根哈希记录在状态块的头部，形成一条可以追踪账户转移的默克尔路径；所有 W-shards 重新配置后的账本状态（分片ID、余额、随机数等)也需要记录在状态块的头部，旨在帮助 W-shards 同步和验证整个账本的状态。</p>
 </li>
 </ul>
 <h3 id="创新："><a href="#创新：" class="headerlink" title="创新："></a>创新：</h3><ul>
@@ -220,7 +226,7 @@
 <h3 id="两阶段投票的设计（paper2）："><a href="#两阶段投票的设计（paper2）：" class="headerlink" title="两阶段投票的设计（paper2）："></a>两阶段投票的设计（paper2）：</h3><p>第一阶段中，位于一个小组中的节点（我们称之为工作分片）部署一致投票来生成和投票支持工作块。工作块包含与工作分片管辖账户相关的交易。只要至少有一个诚实的节点在工作分片中，就不会将包含不可接受交易的工作块附加到该工作分片的区块链上。为了避免有故障或敌对节点干扰一致的投票结果</p>
 <p>第二阶段会召集规模更大的分片（委员会分片）来就没有在第一阶段通过一致投票的工作块达成多数裁决。在委员会分片中的成员仅在验证后才将工作分片中的区块链同步</p>
 <p>为了减轻数据负担，采用状态-块-状态结构而不是块-块结构。每个工作分片的块更新工作分片的状态（例如，帐户余额）并在每个时期形成一个新状态。一个块不是链接到前面的块，而是链接到前一个状态。因此，与其同步整个工作分片的块，只有最新的状态和没有通过一致投票的块会被其他节点在委员会分片中同步。</p>
-<p><img src="/%5Cimg%5CUnanimousThenMajority.png" alt="image-20230415212754271"></p>
+<p><img src="/img/UnanimousThenMajority.png" alt="image-20230415212754271"></p>
 
       
 
@@ -272,7 +278,7 @@
 
 	<!--显示阅读次数-->
 	
-	  <a class="cloud-tie-join-count" href="/2023/04/12/state-sharding-note/" style="color:gray;font-size:14px;">
+	  <a class="cloud-tie-join-count" href="/2023/04/12/State-sharding-note/" style="color:gray;font-size:14px;">
 	    <span class="icon-smile"></span>
 	    <span id="busuanzi_container_page_pv">
 	      阅读量(<span id="busuanzi_value_page_pv"></span>)
@@ -341,7 +347,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/04/12/state-sharding-note/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/04/12/State-sharding-note/" alt="微信分享二维码">
     </div>
 </div>
 
