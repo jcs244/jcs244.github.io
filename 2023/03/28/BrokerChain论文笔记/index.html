@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>BrokerChain论文笔记 | LittleLittleSam</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡 解决方法  对账号状态进行划分，在协议层进行帐号分隔 跨分片事务处理机制，保证跨分片TXs的最终原子性  目标：产生更少的跨分片TXs，确保区块链分片之间的额负载均衡 区块链主流交易模式  账户&#x2F;余额模式：资产增加账户资产余额就增加，资产减少账户余额资产就减少，缺点是容易遭受双花攻击（由于卖家还没收到交易就交付了商品）">
+  <meta name="description" content="欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BrokerChain论文笔记">
 <meta property="og:url" content="http://example.com/2023/03/28/BrokerChain%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="LittleLittleSam">
-<meta property="og:description" content="欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡 解决方法  对账号状态进行划分，在协议层进行帐号分隔 跨分片事务处理机制，保证跨分片TXs的最终原子性  目标：产生更少的跨分片TXs，确保区块链分片之间的额负载均衡 区块链主流交易模式  账户&#x2F;余额模式：资产增加账户资产余额就增加，资产减少账户余额资产就减少，缺点是容易遭受双花攻击（由于卖家还没收到交易就交付了商品）">
+<meta property="og:description" content="欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-28T08:55:36.000Z">
-<meta property="article:modified_time" content="2023-04-03T06:56:05.615Z">
+<meta property="article:modified_time" content="2023-04-08T13:04:11.736Z">
 <meta property="article:author" content="JCS">
 <meta property="article:tag" content="Sharding">
 <meta property="article:tag" content="BlockChain">
@@ -180,22 +180,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
+        <h3 id="欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡"><a href="#欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡" class="headerlink" title="欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡"></a>欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡</h3><span id="more"></span>
 
-<p>欲解决问题：热分片问题，即被大量TXs拥塞的分片，要实现负载均衡</p>
-<p>解决方法</p>
-<ul>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ul>
 <li>对账号状态进行划分，在协议层进行帐号分隔</li>
 <li>跨分片事务处理机制，保证跨分片TXs的最终原子性</li>
 </ul>
-<p>目标：产生更少的跨分片TXs，确保区块链分片之间的额负载均衡</p>
-<p>区块链主流交易模式</p>
-<ul>
+<h3 id="目标：产生更少的跨分片TXs，确保区块链分片之间的额负载均衡"><a href="#目标：产生更少的跨分片TXs，确保区块链分片之间的额负载均衡" class="headerlink" title="目标：产生更少的跨分片TXs，确保区块链分片之间的额负载均衡"></a>目标：产生更少的跨分片TXs，确保区块链分片之间的额负载均衡</h3><h3 id="区块链主流交易模式"><a href="#区块链主流交易模式" class="headerlink" title="区块链主流交易模式"></a>区块链主流交易模式</h3><ul>
 <li>账户&#x2F;余额模式：资产增加账户资产余额就增加，资产减少账户余额资产就减少，缺点是容易遭受双花攻击（由于卖家还没收到交易就交付了商品）</li>
 <li>UTXO模式：只有交易输出，内存占用小，交易明细也可追溯，很难伪造</li>
 </ul>
-<p>BrokerChain主要内容</p>
-<ul>
+<h3 id="BrokerChain主要内容"><a href="#BrokerChain主要内容" class="headerlink" title="BrokerChain主要内容"></a>BrokerChain主要内容</h3><ul>
 <li><p>基于账户&#x2F;余额模式</p>
 </li>
 <li><p>在区块链体系结构的协议层建立账户细分机制：将账户的额余额平摊到各个分片中（交易活跃账户，可能会参与大量的TXs。这种活跃的账号必然会导致火爆的碎片），使跨分片事务变成分片内事务。与用户将存款自主存储在多个较小账户的情况之间的区别在于，BrokerChain分割的账户的地址都是相同的。也就是说，BrokerChain协议使用相同的帐户地址存储位于不同分片的帐户的存款。</p>
@@ -543,6 +538,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">BlockChain</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Consensus</a>
               </li>
             
             <div class="clearfix"></div>
